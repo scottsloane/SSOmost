@@ -80,7 +80,7 @@ llm_model = AutoModelForCausalLM.from_pretrained(
     llm_name,
     torch_dtype=torch.bfloat16,  # This is computation type, not load/memory type. The loading quant type is baked in config.
     token=HF_TOKEN,
-    device_map="auto"  # This will load model to gpu with an offload system
+    device_map={"":"cuda:0"}  # This will load model to gpu with an offload system
 )
 
 llm_tokenizer = AutoTokenizer.from_pretrained(
