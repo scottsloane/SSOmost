@@ -31,7 +31,11 @@ from chat_interface import ChatInterface
 from transformers.generation.stopping_criteria import StoppingCriteriaList
 
 import lib_omost.canvas as omost_canvas
+import random
 
+# function to generate a random seed
+def random_seed():
+    return random.randint(0, 2**31-1)
 
 # SDXL
 
@@ -302,6 +306,8 @@ with gr.Blocks(
                 undo_btn = gr.Button("✏️️ Edit Last Input", variant="secondary", size="sm", min_width=60, interactive=False)
 
             seed = gr.Number(label="Random Seed", value=12345, precision=0)
+            random_seed_btn = gr.Button("Random Seed", variant="secondary", size="sm", min_width=60)
+            random_seed_btn.click(fn=random_seed, outputs=seed)
 
             with gr.Accordion(open=True, label='Language Model'):
                 with gr.Group():
